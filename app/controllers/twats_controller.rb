@@ -3,7 +3,8 @@ class TwatsController < ApplicationController
 
   # GET /twats or /twats.json
   def index
-    @twats = Twat.all
+    @twats = Twat.all.order('created_at DESC')
+    @twat = Twat.new
   end
 
   # GET /twats/1 or /twats/1.json
@@ -25,7 +26,7 @@ class TwatsController < ApplicationController
 
     respond_to do |format|
       if @twat.save
-        format.html { redirect_to @twat, notice: "Twat was successfully created." }
+        format.html { redirect_to root_path, notice: 'Twat was successfully created.' }
         format.json { render :show, status: :created, location: @twat }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -38,7 +39,7 @@ class TwatsController < ApplicationController
   def update
     respond_to do |format|
       if @twat.update(twat_params)
-        format.html { redirect_to @twat, notice: "Twat was successfully updated." }
+        format.html { redirect_to @twat, notice: 'Twat was successfully updated.' }
         format.json { render :show, status: :ok, location: @twat }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -51,7 +52,7 @@ class TwatsController < ApplicationController
   def destroy
     @twat.destroy
     respond_to do |format|
-      format.html { redirect_to twats_url, notice: "Twat was successfully destroyed." }
+      format.html { redirect_to twats_url, notice: 'Twat was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

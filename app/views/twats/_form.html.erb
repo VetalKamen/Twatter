@@ -1,22 +1,12 @@
-<%= form_with(model: twat) do |form| %>
-  <% if twat.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(twat.errors.count, "error") %> prohibited this twat from being saved:</h2>
-
-      <ul>
-        <% twat.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
-
+<%= simple_form_for(@twat) do |f| %>
+  <%= f.error_notification %>
   <div class="field">
-    <%= form.label :twat %>
-    <%= form.text_area :twat %>
+    <div class="control">
+      <%= f.input :twat, label: "Twat about it",
+                  input_html: { class: "textarea" },
+                  wrapper: false, label_html: { class: "label" },
+                  placeholder: "Compose a new twat..." %>
+    </div>
   </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
+  <%= f.button :submit, class: "button is-info" %>
 <% end %>
