@@ -3,6 +3,9 @@
 <p>
   <strong>Twat:</strong>
   <%= @twat.twat %>
+
+  <small>Amount of Likes:</small>
+  <%= @twat.likes.count %>
 </p>
 
 <%= link_to 'Edit', edit_twat_path(@twat) %> |

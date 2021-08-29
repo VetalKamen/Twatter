@@ -1,51 +1,75 @@
 <div class="column is-half">
-  <article class="media box">
-    <figure class="media-left">
-      <p class="image is-64x64">
-        <img src="https://bulma.io/images/placeholders/64x64.png" alt="">
-      </p>
-    </figure>
-    <div class="media-content">
-<%= render 'twats/form' %>
-    </div>
-  </article>
-
-
-<% @twats.each do |twat| %>
-  <div class="box">
-    <article class="media">
-      <div class="media-left">
-        <figure class="image is-64x64">
-          <img src="https://bulma.io/images/placeholders/64x64.png" alt="">
-        </figure>
-      </div>
+  <% if user_signed_in? %>
+    <article class="media box">
+      <figure class="media-left">
+        <p class="image is-64x64">
+          <%= gravatar_image_tag(current_user.email, size: 64, alt: current_user.name) %>
+        </p>
+      </figure>
       <div class="media-content">
-        <div class="content">
-          <strong>Vitalii Kemeniash</strong> <br/>
-          <small>@epam</small><br/>
-          <p><%= twat.twat %></p>
+        <%= render 'twats/form' %>
+      </div>
+    </article>
+  <% end %>
+
+  <% @twats.each do |twat| %>
+    <div class="box">
+      <article class="media">
+        <div class="media-left">
+          <figure class="image is-64x64">
+            <%= gravatar_image_tag(twat.user.email, size: 64, alt: twat.user.name) %>
+          </figure>
         </div>
-        <nav class="level">
-          <div class="level-left is-mobile">
-            <%= link_to twat, class: "level-item" do %>
+        <div class="media-content">
+          <div class="content">
+            <strong><%= twat.user.name %></strong> <br/>
+            <small><%= twat.user.username %></small><br/>
+            <p><%= twat.twat %></p>
+          </div>
+          <nav class="level">
+            <div class="level-left is-mobile">
+              <% if user_signed_in? %>
+                <%= link_to like_path(twat), method: :put, class: "level-item" do %>
+
+                  <%= twat.likes.count %>
+                  <span class="icon">
+                <i class="fa fa-thumbs-up" aria-hidden="true"></i>
+              </span>
+                <% end %>
+                <%= link_to retwat_path(twat),  method: :post, class: "level-item" do %>
+
+                  <%= twat.retwats.count %>
+                  <span class="icon">
+               <i class="fa fa-retweet" aria-hidden="true"></i>
+              </span>
+                <% end %>
+                <% if twat.user.id == current_user.id %>
+                  <%= link_to twat, class: "level-item" do %>
               <span class="icon">
                 <i class="fa fa-link" aria-hidden="true"></i>
               </span>
-            <% end %>
-            <%= link_to edit_twat_path(twat), class: "level-item" do %>
+                  <% end %>
+                  <%= link_to edit_twat_path(twat), class: "level-item" do %>
              <span class="icon">
                 <i class="fa fa-pencil" aria-hidden="true"></i>
               </span>
-            <% end %>
-            <%= link_to twat, method: :delete, data: { confirm: "Are U sure u want to delete this?" } do %>
+                  <% end %>
+                  <%= link_to twat, method: :delete, data: { confirm: "Are U sure u want to delete this?" } do %>
              <span class="icon">
                 <i class="fa fa-trash-o" aria-hidden="true"></i>
               </span>
-            <% end %>
-          </div>
-        </nav>
-      </div>
-    </article>
-  </div>
-<% end %>
+                  <% end %>
+                <% end %>
+              <% else %>
+                <%= twat.likes.count %>
+                <span class="icon">
+                <i class="fa fa-thumbs-up" aria-hidden="true"></i>
+              </span>
+              <% end %>
+            </div>
+          </nav>
+        </div>
+      </article>
+    </div>
+  <% end %>
 </div>
