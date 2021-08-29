@@ -3,10 +3,33 @@
 <p>
   <strong>Twat:</strong>
   <%= @twat.twat %>
-
-  <small>Amount of Likes:</small>
-  <%= @twat.likes.count %>
 </p>
+<hr>
+<small>Amount of Likes:</small>
+<%= @twat.likes.count %>
+<hr>
+<small>Amount of Comments:</small>
+<%= @twat.comments.count %>
+<hr>
+<small>Comments Content:</small>
+<% @twat.comments.each do |comment| %>
+  <p>
+    <%= comment.body %>
+  </p>
+<% end %>
+
+<div class="card my-1">
+  <div class="card-body">
+    <p class="font-weight-bold">Comments</p>
+    <%= form_with(model: [@twat, @twat.comments.build]) do |f| %>
+      <div class="form-group">
+        <%= f.label 'New comment' %>
+        <%= f.text_area :body, class: 'form-control' %>
+      </div>
+      <%= f.submit 'Submit', class: 'btn btn-primary' %>
+    <% end %>
+  </div>
+</div>
 
 <%= link_to 'Edit', edit_twat_path(@twat) %> |
 <%= link_to 'Back', twats_path %>

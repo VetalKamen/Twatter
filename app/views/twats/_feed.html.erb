@@ -36,19 +36,21 @@
                 <i class="fa fa-thumbs-up" aria-hidden="true"></i>
               </span>
                 <% end %>
-                <%= link_to retwat_path(twat),  method: :post, class: "level-item" do %>
+                <%= link_to retwat_path(twat), method: :post, class: "level-item" do %>
 
                   <%= twat.retwats.count %>
                   <span class="icon">
                <i class="fa fa-retweet" aria-hidden="true"></i>
               </span>
                 <% end %>
-                <% if twat.user.id == current_user.id %>
-                  <%= link_to twat, class: "level-item" do %>
+                <%= link_to twat, class: "level-item" do %>
+
+                  <%= twat.comments.count %>
               <span class="icon">
-                <i class="fa fa-link" aria-hidden="true"></i>
+                <i class="fa fa-comment" aria-hidden="true"></i>
               </span>
-                  <% end %>
+                <% end %>
+                <% if twat.user.id == current_user.id %>
                   <%= link_to edit_twat_path(twat), class: "level-item" do %>
              <span class="icon">
                 <i class="fa fa-pencil" aria-hidden="true"></i>
@@ -64,6 +66,10 @@
                 <%= twat.likes.count %>
                 <span class="icon">
                 <i class="fa fa-thumbs-up" aria-hidden="true"></i>
+              </span>
+                <%= twat.retwats.count %>
+                <span class="icon">
+               <i class="fa fa-retweet" aria-hidden="true"></i>
               </span>
               <% end %>
             </div>

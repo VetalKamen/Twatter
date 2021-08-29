@@ -3,6 +3,15 @@ class TwatsController < ApplicationController
   before_action :set_twat, only: %i[show edit update destroy like retwat]
   before_action :authenticate_user!, except: %i[index show]
 
+  def comment(content)
+    Comment.create(
+      user_id: current_user.id,
+      twat_id: @twat.id,
+      content: content
+    )
+    redirect_to root_path, alert: 'Your comment has been successfully added!'
+  end
+
   def retwat
     if @twat.retwatted?(current_user)
       redirect_to root_path, alert: 'Your\'ve already retwatted this from your account!'
@@ -82,8 +91,9 @@ class TwatsController < ApplicationController
 
   # DELETE /twats/1 or /twats/1.json
   def destroy
+    retwat = Retwat.all.find_by(user_id: current_user.id, twat_id: @twat.original_twat_id)
+    retwat.destroy unless retwat.nil?
     @twat.destroy
-    Retwat.all.find_by(user_id: current_user.id, twat_id: @twat.original_twat_id).destroy
     respond_to do |format|
       format.html { redirect_to twats_url, notice: 'Twat was successfully destroyed.' }
       format.json { head :no_content }
