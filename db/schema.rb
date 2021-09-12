@@ -12,14 +12,14 @@
 
 ActiveRecord::Schema.define(version: 2021_08_29_120338) do
 
-  create_table "comments", charset: "utf8mb4", force: :cascade do |t|
+  create_table "comments", charset: "utf8", collation: "utf8_unicode_ci", force: :cascade do |t|
     t.text "body"
     t.integer "twat_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "likes", charset: "utf8mb4", force: :cascade do |t|
+  create_table "likes", charset: "utf8", collation: "utf8_unicode_ci", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "twat_id", null: false
     t.datetime "created_at", precision: 6, null: false
@@ -28,7 +28,7 @@ ActiveRecord::Schema.define(version: 2021_08_29_120338) do
     t.index ["user_id"], name: "index_likes_on_user_id"
   end
 
-  create_table "retwats", charset: "utf8mb4", force: :cascade do |t|
+  create_table "retwats", charset: "utf8", collation: "utf8_unicode_ci", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "twat_id", null: false
     t.datetime "created_at", precision: 6, null: false
@@ -37,15 +37,15 @@ ActiveRecord::Schema.define(version: 2021_08_29_120338) do
     t.index ["user_id"], name: "index_retwats_on_user_id"
   end
 
-  create_table "twats", charset: "utf8mb4", force: :cascade do |t|
-    t.text "twat"
+  create_table "twats", charset: "utf8", collation: "utf8_unicode_ci", force: :cascade do |t|
+    t.text "twat", size: :tiny
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "user_id"
     t.integer "original_twat_id"
   end
 
-  create_table "users", charset: "utf8mb4", force: :cascade do |t|
+  create_table "users", charset: "utf8", collation: "utf8_unicode_ci", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
