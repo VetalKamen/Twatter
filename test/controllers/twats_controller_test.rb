@@ -1,17 +1,15 @@
 require "test_helper"
 
 class TwatsControllerTest < ActionDispatch::IntegrationTest
+  include Devise::Test::IntegrationHelpers
+
   setup do
     @twat = twats(:one)
+    sign_in users(:john)
   end
 
   test "should get index" do
     get twats_url
-    assert_response :success
-  end
-
-  test "should get new" do
-    get new_twat_url
     assert_response :success
   end
 
@@ -20,16 +18,11 @@ class TwatsControllerTest < ActionDispatch::IntegrationTest
       post twats_url, params: { twat: { twat: @twat.twat } }
     end
 
-    assert_redirected_to twat_url(Twat.last)
+    assert_redirected_to root_path
   end
 
   test "should show twat" do
     get twat_url(@twat)
-    assert_response :success
-  end
-
-  test "should get edit" do
-    get edit_twat_url(@twat)
     assert_response :success
   end
 
