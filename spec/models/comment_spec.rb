@@ -2,9 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Comment, type: :model do
   subject {
-    user = User.new(name: 'Dave', username: 'Davidko', password: 'password', email: 'david@mail.com')
-    twat = Twat.new(twat: 'Molestiae assumenda dignissimos doloribus sint.', user: user)
-    described_class.new(body: 'Tempore sapiente ut mollitia eveniet alias unde dolore.', twat: twat)
+    create(:comment)
   }
 
   describe "Validations" do

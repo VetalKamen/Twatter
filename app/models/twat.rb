@@ -4,6 +4,7 @@ class Twat < ApplicationRecord
   has_many :retwats, dependent: :destroy
   has_many :comments, dependent: :destroy
   validates_length_of :twat, minimum: 2, maximum: 140, allow_blank: true
+  validates_presence_of :user
 
   def liked?(user)
     !!self.likes.find { |like| like.user_id == user.id }
