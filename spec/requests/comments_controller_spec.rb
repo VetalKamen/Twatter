@@ -10,7 +10,7 @@ RSpec.describe CommentsController, type: :request do
   end
 
   describe 'POST /twats/<twat_id>/comments' do
-    let!(:twat) { create(:twat) }
+    let(:twat) { create(:twat) }
     it 'should create comment' do
       comment = build(:comment)
       post twat_comments_path(twat), params: { comment: { body: comment.body, twat: twat } }
@@ -21,8 +21,8 @@ RSpec.describe CommentsController, type: :request do
   end
 
   describe 'PUT /twats/<twat_id>/comments/<id>' do
-    let!(:twat) { create(:twat) }
-    let!(:comment) { create(:comment, twat: twat) }
+    let(:twat) { create(:twat) }
+    let(:comment) { create(:comment, twat: twat) }
     it 'should change comment with valid attributes' do
       put twat_comment_path(twat_id: twat.id, id: comment.id), params: { comment: { body: 'test comment' } }
       expect(comment.reload.body).to eq('test comment')
@@ -38,8 +38,8 @@ RSpec.describe CommentsController, type: :request do
   end
 
   describe 'DELETE /twats/<twat_id>/comments/<id>' do
-    let!(:twat) { create(:twat) }
-    let!(:comment) { create(:comment, twat: twat) }
+    let(:twat) { create(:twat) }
+    let(:comment) { create(:comment, twat: twat) }
     it 'should delete comment' do
       delete twat_comment_path(twat_id: twat.id, id: comment.id)
       expect(twat.comments.count).to eq(0)

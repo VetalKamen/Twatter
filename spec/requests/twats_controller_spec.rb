@@ -23,7 +23,7 @@ RSpec.describe TwatsController, type: :request do
   end
 
   describe 'PUT /twats' do
-    let!(:twat) { create(:twat) }
+    let(:twat) { create(:twat) }
     it 'should change twat with valid attributes' do
       put twat_path(twat), params: { twat: { twat: 'test twat' } }
       expect(twat.reload.twat).to eq('test twat')
@@ -39,7 +39,7 @@ RSpec.describe TwatsController, type: :request do
   end
 
   describe 'DELETE /twat' do
-    let!(:twat) { create(:twat) }
+    let(:twat) { create(:twat) }
     it 'should delete twat' do
       delete twat_path(twat)
       expect(Twat.count).to eq(0)
