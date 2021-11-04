@@ -2,8 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Twat, type: :model do
   subject {
-    user = User.new(name: 'Dave', username: 'Davidko', password: 'password', email: 'david@mail.com')
-    described_class.new(twat: 'Molestiae assumenda dignissimos doloribus sint.', user: user)
+    create(:twat)
   }
 
   describe "Validations" do

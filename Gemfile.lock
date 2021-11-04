@@ -99,6 +99,11 @@ GEM
     erubi (1.10.0)
     eventmachine (1.2.7)
     eventmachine (1.2.7-x64-mingw32)
+    factory_bot (6.2.0)
+      activesupport (>= 5.0.0)
+    factory_bot_rails (6.2.0)
+      factory_bot (~> 6.2.0)
+      railties (>= 5.0.0)
     faker (2.19.0)
       i18n (>= 1.6, < 2)
     ffi (1.15.3)
@@ -301,6 +306,7 @@ DEPENDENCIES
   byebug
   capybara (>= 3.26)
   devise (~> 4.3)
+  factory_bot_rails
   faker
   gravatar_image_tag (~> 1.2)
   guard (~> 2.14, >= 2.14.1)

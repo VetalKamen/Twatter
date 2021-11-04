@@ -17,4 +17,4 @@
 1. make steps 1-7 from "Twat Init"
 2. run "rails db:migrate RAILS_ENV=test"
 3. run "rspec spec/models" to test all models
-4. run "rails test test/controllers" to test all controllers
+4. run "rspec spec/requests" to test all controllers
